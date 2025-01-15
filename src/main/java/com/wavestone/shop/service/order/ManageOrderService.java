@@ -1,8 +1,8 @@
 package com.wavestone.shop.service.order;
 
+import com.wavestone.shop.adapters.rest.order.OrderCreateDto;
 import com.wavestone.shop.domain.Order;
 import com.wavestone.shop.domain.OrderRepository;
-import com.wavestone.shop.dto.OrderDto;
 import com.wavestone.shop.mapper.OrderMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +20,11 @@ public class ManageOrderService {
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
 
-    @Transactional
-    public Long storeOrder(OrderDto order) {
-        Order entity = Optional.ofNullable(order.id())
-                .map(id -> orderRepository.findById(id)
-                        .orElseThrow(() -> new EntityNotFoundException("Order not found")))
-                .orElseGet(Order::new);
 
-        orderMapper.toEntity(entity, order);
+    @Transactional
+    public Long storeOrder(OrderCreateDto order) {
+
+        var entity = orderMapper.toEntity(order);
         orderRepository.save(entity);
 
         log.info("Saved order {}", entity.getId());

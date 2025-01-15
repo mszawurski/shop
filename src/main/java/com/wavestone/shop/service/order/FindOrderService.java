@@ -24,11 +24,5 @@ public class FindOrderService {
 		return orderMapper.toDtoList(orders);
 	}
 
-	@Transactional(readOnly = true)
-	public OrderDto getOrderById(Long id) {
-		Order order = orderRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Order not found"));
-		return orderMapper.toDto(order);
-	}
 
 }

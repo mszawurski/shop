@@ -58,8 +58,8 @@ class OrderRepositoryTest {
 
 		assertNotNull(actualOrder);
 		assertNotNull(actualOrder.getCustomer());
-		assertNotNull(actualOrder.getOrderLines());
-		assertEquals(1, actualOrder.getOrderLines().size());
+		assertNotNull(actualOrder.getLines());
+		assertEquals(1, actualOrder.getLines().size());
 	}
 
 }

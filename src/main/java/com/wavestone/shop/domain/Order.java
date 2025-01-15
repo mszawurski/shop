@@ -33,13 +33,13 @@ public class Order {
 	private OrderStatus status;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
-	private List<Line> orderLines;
+	private List<Line> lines;
 
 	public void addLine(Line line) {
-		if (orderLines == null) {
-			orderLines = new ArrayList<>();
+		if (lines == null) {
+			lines = new ArrayList<>();
 		}
-		orderLines.add(line);
+		lines.add(line);
 		line.setOrder(this);
 	}
 
