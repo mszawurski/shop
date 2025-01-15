@@ -15,7 +15,7 @@ import jakarta.persistence.EntityManager;
 class OrderRepositoryTest {
 
 	@Autowired
-	private OrderHeaderRepository orderRepository;
+	private OrderRepository orderRepository;
 
 	@Autowired
 	private EntityManager em;
@@ -33,14 +33,14 @@ class OrderRepositoryTest {
 				.build();
 		em.persist(product);
 
-		OrderHeader order = OrderHeader.builder()
+		Order order = Order.builder()
 				.customer(customer)
 				.description("Test order")
-				.status(OrderHeaderStatus.CREATED)
+				.status(OrderStatus.CREATED)
 				.orderDate(LocalDateTime.of(2024, 1, 1, 0, 0))
 				.build();
 
-		OrderLine line = OrderLine.builder()
+		Line line = Line.builder()
 				.product(product)
 				.quantity(10)
 				.description("Test line")
@@ -52,7 +52,7 @@ class OrderRepositoryTest {
 		orderRepository.saveAndFlush(order);
 
 		// then
-		OrderHeader actualOrder = em.createQuery("select o from OrderHeader o where o.id = :id", OrderHeader.class)
+		Order actualOrder = em.createQuery("select o from Order o where o.id = :id", Order.class)
 				.setParameter("id", order.getId())
 				.getSingleResult();
 

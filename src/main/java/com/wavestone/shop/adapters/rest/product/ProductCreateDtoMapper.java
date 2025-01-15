@@ -1,8 +1,7 @@
 package com.wavestone.shop.adapters.rest.product;
 
-import org.mapstruct.*;
-
-import com.wavestone.shop.order.application.ProductDto;
+import com.wavestone.shop.dto.ProductDto;
+import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 interface ProductCreateDtoMapper {
